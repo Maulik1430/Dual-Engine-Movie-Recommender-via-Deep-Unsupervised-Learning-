@@ -9,7 +9,6 @@
 
 **A dual-approach movie recommendation system using collaborative filtering techniques**
 
-## Live Demo
 This project is deployed as a Streamlit web application.
 👉 [Launch the app](https://utilization-of-cnn-models-for-animal-species-detection-y8pfnhp.streamlit.app)
 
