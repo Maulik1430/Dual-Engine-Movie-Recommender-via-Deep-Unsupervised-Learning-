@@ -3,6 +3,30 @@ import pandas as pd
 import numpy as np
 import scipy
 from sklearn.neighbors import NearestNeighbors
+import zipfile
+import os
+from pathlib import Path
+
+def extract_dataset():
+    """Extract the MovieLens dataset from ZIP if not already extracted."""
+    zip_path = "movie-lens-1m.zip"
+    extract_dir = "movie-lens-1m"
+    
+    # Check if the directory already exists
+    if os.path.exists(extract_dir):
+        # Verify all required files are present
+        required_files = ['users.csv', 'movies.csv', 'ratings.csv']
+        if all(os.path.exists(os.path.join(extract_dir, f)) for f in required_files):
+            return extract_dir
+    
+    # Extract the ZIP file if it exists
+    if os.path.exists(zip_path):
+        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+            zip_ref.extractall(".")
+        return extract_dir
+    else:
+        st.error(f"Dataset file '{zip_path}' not found! Please upload movie-lens-1m.zip to the project directory.")
+        st.stop()
 
 def convert_rating_to_stars(rating):
     """Convert a rating to a star representation."""
@@ -72,15 +96,19 @@ def calculate_svd_recommendations(df_ratings, k=50):
     return df_predicted
 
 def main():
+    # Extract dataset from ZIP if needed
+    dataset_dir = extract_dataset()
+    
     st.title("MovieLens Movie Recommendation (Collaborative Filtering)")
-    df_users = pd.read_csv("movie-lens-1m/users.csv")
-    df_movies = pd.read_csv("movie-lens-1m/movies.csv")
+    
+    df_users = pd.read_csv(f"{dataset_dir}/users.csv")
+    df_movies = pd.read_csv(f"{dataset_dir}/movies.csv")
     
     df_movies['thumbnail'] = df_movies['movie_id'].apply(
         lambda x: f"https://raw.githubusercontent.com/kavehbc/movielens-posters/refs/heads/master/posters/{x}.jpg"
     )
     
-    df_ratings = pd.read_csv("movie-lens-1m/ratings.csv")
+    df_ratings = pd.read_csv(f"{dataset_dir}/ratings.csv")
     df_ratings_movies = pd.merge(df_ratings, df_movies, on='movie_id')
 
     with st.sidebar:
