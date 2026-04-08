@@ -9,15 +9,15 @@
 
 **A dual-approach movie recommendation system using collaborative filtering techniques**
 
+## Live Demo
+This project is deployed as a Streamlit web application.
+👉 [Launch the app](https://utilization-of-cnn-models-for-animal-species-detection-y8pfnhp.streamlit.app)
+
 [Features](#-features) • [Demo](#-demo) • [Installation](#-installation) • [Usage](#-usage) • [How It Works](#-how-it-works) • [Project Structure](#-project-structure)
 
 </div>
 
 ---
-## Live Demo
-This project is deployed as a Streamlit web application.
-
-👉 [Launch the app]([https://utilization-of-cnn-models-for-animal-species-detection-y8pfnhp.streamlit.app](https://hnkfg4dsyccobvergzxapo.streamlit.app/))
 ## 📖 Overview
 
 This project implements a **collaborative filtering-based movie recommendation system** using the MovieLens 1M dataset. It provides personalized movie recommendations through two powerful unsupervised learning approaches:
